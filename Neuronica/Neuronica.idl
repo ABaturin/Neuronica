@@ -1,0 +1,56 @@
+// Neuronica.idl : IDL source for Neuronica
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (Neuronica.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(7A60C9BC-AA96-486D-A766-62C910397072),
+	helpstring("Neuronica algorithms"),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IBackPropagation : IDispatch{
+	[id(1)] HRESULT CreateNetwork([in] LONG LayersCount, [in] LONG *Layers);
+	[id(2)] HRESULT InitializeNetwork([in] LONG InitializationType, [in] LONG RandomSeed);
+	[id(33), helpstring("method MULT")] HRESULT Mult([in, out] DOUBLE* theDouble);
+	[id(3)] HRESULT CreatePatterns([in] LONG Patterns);
+	[propget, id(4)] HRESULT Patterns([in] LONG Pattern, [in] LONG Index, [out, retval] DOUBLE* pVal);
+	[propput, id(4)] HRESULT Patterns([in] LONG Pattern, [in] LONG Index, [in] DOUBLE newVal);
+	[id(5)] HRESULT TrainBProp([in] LONG EpCount, [in, out] DOUBLE* Error, [in] DOUBLE LearningRate, [in] DOUBLE Momentum);
+	[id(6)] HRESULT TrainRProp([in] LONG EpCount, [in, out] DOUBLE* Error, [in] DOUBLE IncreaseFactor, [in] DOUBLE DecreaseFactor, [in] DOUBLE DeltaMin, [in] DOUBLE DeltaMax, [in] DOUBLE DeltaInit);
+	[id(7)] HRESULT TrainSCG([in] LONG EpCount, [in, out] DOUBLE* Error, [in] DOUBLE Sigma, [in] DOUBLE Lambda);
+	[propget, id(8)] HRESULT LayersCount([out, retval] LONG* pVal);
+	[propget, id(9)] HRESULT NodesCount([out, retval] LONG* pVal);
+	[propget, id(10)] HRESULT WeightsCount([out, retval] LONG* pVal);
+	[propget, id(11)] HRESULT Nodes([in] LONG Index, [out, retval] DOUBLE* pVal);
+	[propput, id(11)] HRESULT Nodes([in] LONG Index, [in] DOUBLE newVal);
+	[propget, id(12)] HRESULT Weights([in] LONG Index, [out, retval] DOUBLE* pVal);
+	[propput, id(12)] HRESULT Weights([in] LONG Index, [in] DOUBLE newVal);
+	[propget, id(13)] HRESULT Layers([in] LONG Index, [out, retval] LONG* pVal);
+	[propget, id(14)] HRESULT Relevances([in] LONG Index, [out, retval] DOUBLE* pVal);
+	[propget, id(15)] HRESULT PatternsCount([out, retval] LONG* pVal);
+	[id(16)] HRESULT Test([in] LONG Pattern);
+};
+[
+	uuid(BD2BF929-C1C8-45DB-AEB2-D717DC863956),
+	version(1.0),
+]
+library NeuronicaLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(BDF536C9-B7B3-4257-BB19-44A81436D37E),
+		helpstring("Neuronica algorithms")
+	]
+	coclass BackPropagation
+	{
+		[default] interface IBackPropagation;
+	};
+};
+

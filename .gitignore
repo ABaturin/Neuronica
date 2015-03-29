@@ -3,10 +3,20 @@
 *.lo
 *.o
 *.obj
+*.sdf
+*.suo
+*.ilk
+*.idb
+*.pdb
+*.exp
+*.tlog
+*.log
+*.tlb
 
 # Precompiled Headers
 *.gch
 *.pch
+*.ipch
 
 # Compiled Dynamic libraries
 *.so
@@ -26,3 +36,5 @@
 *.exe
 *.out
 *.app
+
+ipch/
